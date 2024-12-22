@@ -1,0 +1,16 @@
+[{
+  "_id": {
+    "$oid": "67558025d3daaf8b18e941fa"
+  },
+  "title": "Sherlock",
+  "release_year": "2010",
+  "cast": "Benedict Cumberbatch, Martin Freeman",
+  "average_rating": "9.1",
+  "description": "The quirky spin on Conan Doyle's iconic sleuth pitches him as a 'high-functioning sociopath' in modern-day London. Assisting him in his investigations: Afghanistan War vet John Watson to Holmes by a mutual acquaintance.",
+  "genres": [
+    "Mystery",
+    "Drama",
+    "Thriller",
+    "Crime"
+  ]
+}]

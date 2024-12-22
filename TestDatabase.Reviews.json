@@ -1,0 +1,13 @@
+[{
+  "_id": {
+    "$oid": "675589778ea320366cabf1c1"
+  },
+  "user_id": {
+    "$oid": "675586d08ea320366cabf1bd"
+  },
+  "movie_id": {
+    "$oid": "67558025d3daaf8b18e941fa"
+  },
+  "rating": "9",
+  "comment": "Greate"
+}]
