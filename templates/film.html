@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Film</title>
+    <link rel="stylesheet" href="../static/css/film.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <button class="logo-button">IMDb</button>
+      <form action="/search" method="get" class="search-form">
+        <input type="search" name="query" placeholder="Search" />
+        <button type="submit">Search</button>
+      </form>
+      <button class="user-icon">
+        <i class="fa fa-user"></i>
+      </button>
+    </header>
+
+    <main class="film-details">
+      <section class="film-info">
+        <img
+          class="film-img"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqq3U4LIv85Xb1nFpRPt8kxrvBCZ60xDpECg&s"
+          alt="Movie photo"
+        />
+        <div class="info-text">
+          <h1>Film Name</h1>
+          <p class="meta-info">Director: John Doe | Writer: Jane Doe</p>
+          <p class="cast">Stars: Actor A, Actor B, Actor C</p>
+          <p class="duration">2h 44m</p>
+          <p class="summary">
+            This is a brief summary of the film. It provides an overview of the
+            plot and main themes of the story.
+          </p>
+        </div>
+      </section>
+
+      <section class="rating-section">
+        <div class="rating">
+          <i class="fa fa-star"></i>
+          <span>8.4/10</span>
+          <small>1.6M ratings</small>
+        </div>
+        <button class="rate-button">Rate</button>
+      </section>
+
+      <section class="watchlist-section">
+        <button class="watchlist-button">
+          <i class="fa fa-plus"></i>
+          Add to Watchlist
+        </button>
+        <small>Added by 1.1M users</small>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 1990-2024 by IMDb.com, Inc.</p>
+    </footer>
+  </body>
+</html>
