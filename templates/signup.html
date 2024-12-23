@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="stylesheet" href="../static/css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body style="background-image: url('../images/download (1).jfif'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;">
+
+<main class="signup-container">
+    <h1>Create Account</h1>
+    <label>Name</label>
+    <input type="text" name="name" class="input-field">
+    <label>Email</label>
+    <input type="email" name="signup-email" class="input-field">
+    <label>Password</label>
+    <input type="password" name="signup-password" class="input-field">
+    <button class="signup-button" onclick="submitSignupForm()">Create Account</button>
+
+    <footer class="footer">
+        <p>© 1990-2024 by IMDb.com, Inc.</p>
+    </footer>
+</main>
+
+<script>
+    function submitSignupForm() {
+        const name = document.querySelector('input[name="name"]').value;
+        const email = document.querySelector('input[name="signup-email"]').value;
+        const password = document.querySelector('input[name="signup-password"]').value;
+
+        fetch('/create_account', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, email, password }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+            if (data.success) {
+                window.location.href = "/";
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>
+
+</body>
+</html>
