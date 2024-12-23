@@ -1,0 +1,164 @@
+گام اول: آماده‌سازی محیط توسعه
+نصب پیش‌نیازها:
+
+نصب پایتون (نسخه 3.7 یا بالاتر).
+نصب MongoDB (اگر به صورت لوکال کار می‌کنید).
+نصب کتابخانه‌های موردنیاز پایتون:
+bash
+Copy code
+pip install flask pymongo dnspython flask-cors
+ایجاد ساختار پروژه:
+
+sql
+Copy code
+movie-review-system/
+├── app.py
+├── templates/
+│   ├── index.html
+│   ├── review.html
+│   ├── recommendations.html
+├── static/
+│   ├── css/
+│   │   └── style.css
+└── database/
+    └── init_data.py
+گام دوم: تنظیمات MongoDB
+اتصال به MongoDB: ابتدا یک پایگاه داده در MongoDB ایجاد کنید. برای اتصال به MongoDB از کد زیر استفاده کنید:
+
+python
+Copy code
+from pymongo import MongoClient
+
+# اتصال به MongoDB
+client = MongoClient("mongodb://localhost:27017/")
+db = client["movie_review_system"]
+
+# کلکشن‌ها
+movies_collection = db["movies"]
+users_collection = db["users"]
+reviews_collection = db["reviews"]
+درج اطلاعات اولیه در MongoDB: یک فایل init_data.py ایجاد کنید تا اطلاعات اولیه (فیلم‌ها و ژانرها) را درج کنید:
+
+python
+Copy code
+movies = [
+    {"title": "Inception", "genre": "Sci-Fi", "year": 2010},
+    {"title": "The Dark Knight", "genre": "Action", "year": 2008},
+    {"title": "Interstellar", "genre": "Sci-Fi", "year": 2014},
+]
+
+for movie in movies:
+    movies_collection.insert_one(movie)
+گام سوم: طراحی رابط کاربری
+ایجاد فایل‌های HTML:
+
+index.html برای نمایش لیست فیلم‌ها.
+review.html برای ثبت نقد و امتیاز.
+recommendations.html برای نمایش پیشنهادات.
+مثال کد index.html:
+
+html
+Copy code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Movie Review System</title>
+</head>
+<body>
+    <h1>Welcome to the Movie Review System</h1>
+    <ul>
+        {% for movie in movies %}
+            <li>
+                <h2>{{ movie.title }} ({{ movie.year }})</h2>
+                <p>Genre: {{ movie.genre }}</p>
+                <a href="/review/{{ movie['_id'] }}">Review this movie</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+ایجاد استایل CSS: فایل static/css/style.css:
+
+css
+Copy code
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #fff;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 5px;
+}
+گام چهارم: توسعه API و منطق سرور
+ایجاد فایل app.py:
+
+مدیریت مسیرها (Routes) با استفاده از Flask:
+python
+Copy code
+from flask import Flask, render_template, request, redirect
+from pymongo import MongoClient
+
+app = Flask(__name__)
+
+# اتصال به MongoDB
+client = MongoClient("mongodb://localhost:27017/")
+db = client["movie_review_system"]
+movies_collection = db["movies"]
+reviews_collection = db["reviews"]
+
+@app.route("/")
+def index():
+    movies = list(movies_collection.find())
+    return render_template("index.html", movies=movies)
+
+@app.route("/review/<movie_id>", methods=["GET", "POST"])
+def review(movie_id):
+    movie = movies_collection.find_one({"_id": ObjectId(movie_id)})
+    if request.method == "POST":
+        review = request.form["review"]
+        rating = int(request.form["rating"])
+        reviews_collection.insert_one({
+            "movie_id": movie_id,
+            "review": review,
+            "rating": rating
+        })
+        return redirect("/")
+    return render_template("review.html", movie=movie)
+
+@app.route("/recommendations")
+def recommendations():
+    # منطق پیشنهادات بر اساس ژانر
+    return render_template("recommendations.html")
+
+if __name__ == "__main__":
+    app.run(debug=True)
+ایجاد منطق پیشنهاد فیلم: در متد recommendations، فیلم‌هایی که کاربر قبلاً مشاهده نکرده یا امتیاز نداده است را بر اساس ژانر پیشنهاد دهید.
+
+گام پنجم: تست و اجرا
+سرور Flask را اجرا کنید:
+
+bash
+Copy code
+python app.py
+در مرورگر به آدرس http://127.0.0.1:5000 بروید.
+
+صفحات و ویژگی‌های سیستم را بررسی کنید.
+
