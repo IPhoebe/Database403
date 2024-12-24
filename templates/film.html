@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{{ movie['title'] }}</title>
+    <link rel="stylesheet" href="../static/css/film.css"/>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+</head>
+<body>
+<header class="header">
+    <h1>{{ movie['title'] }}</h1>
+    <button class="logo-button">IMDb</button>
+    <form action="/search" method="get" class="search-form">
+        <input type="search" name="query" placeholder="Search"/>
+        <button type="submit">Search</button>
+    </form>
+    <button class="user-icon" onclick="location.href='/profile'">
+        <i class="fa fa-user"></i>
+    </button>
+</header>
+
+<main class="film-details">
+    <section class="film-info">
+        <img
+                class="film-img"
+                src="{{ movie['image'] }}"
+                alt="{{ movie['title'] }}"
+        />
+        <div class="info-text">
+            <p>Director: {{ movie['director'] }}</p>
+            <p>Writer: {{ movie['writer'] }}</p>
+            <p>Stars: {{ movie['stars'] }}</p>
+            <p>Duration: {{ movie['duration'] }}</p>
+            <p>Summary: {{ movie['summary'] }}</p>
+        </div>
+    </section>
+
+    <section class="rating-section">
+        <div class="rating">
+            <i class="fa fa-star"></i>
+            <span>{{ movie['rating'] }}</span>
+            <small>{{ movie['ratings_count'] }} ratings</small>
+        </div>
+        <button class="rate-button" onclick="rateMovie()">Rate</button>
+    </section>
+
+    <section class="watchlist-section">
+        <button onclick="addToWatchlist()" class="watchlist-button"><i class="fa fa-plus"></i>
+            Add to Watchlist
+        </button>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>© 1990-2024 by IMDb.com, Inc.</p>
+</footer>
+<script> function rateMovie() {
+    const rating = prompt("Enter your rating (1-10):");
+    if (rating !== null) {
+        fetch('/rate-movie', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json',},
+            body:
+                JSON.stringify({
+                    movie_id: '{{ movie["_id"] }}', movie_title: '{{ movie["title"] }}',
+                    rating: parseInt(rating, 10)
+                }),
+        })
+            .then(response => response.json())
+            .then(data => alert(data.message))
+            .catch(error => console.error('Error:', error));
+    }
+}
+
+function addToWatchlist() {
+    fetch('/update-watchlist', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json',},
+        body:
+            JSON.stringify({
+                movie_id: '{{ movie["_id"] }}', movie_title: '{{ movie["title"] }}'
+                ,
+            })
+        ,
+    })
+        .then(response => response.json())
+        .then(data => alert(data.message))
+        .catch(error => console.error('Error:', error));
+}
+</script>
+</body>
+</html>
