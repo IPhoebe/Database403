@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Movie Review System</title>
+</head>
+<body>
+    <h1>Welcome to the Movie Review System</h1>
+    <ul>
+        {% for movie in movies %}
+            <li>
+                <h2>{{ movie.title }} ({{ movie.year }})</h2>
+                <p>Genre: {{ movie.genre }}</p>
+                <a href="/review/{{ movie['_id'] }}">Review this movie</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
