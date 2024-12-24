@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="../static/css/home.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="pic-grid">
+            <button class="menu-btn" onclick="toggleMenu()">≡ Menu</button>
+            <div class="menu-list" id="menuList">
+                <a href="#home">Home</a>
+                <a href="/profile/{{ session['user_id'] }}">Profile</a>  <!-- Update profile link -->
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <script src="scripts.js"></script>
+            <a href="home.html">
+                <button>IMDb</button>
+            </a>
+            <form action="/search" method="get">
+                <input type="search" name="query" placeholder="Type here" />
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </header>
+    <section>
+        <h2>Suggested Movies</h2>
+        <div class="pic-grid">
+            {% for movie in movies %}
+            <div class="movie-card">
+                <img src="{{ movie['image'] }}" alt="{{ movie['title'] }}" class="movie-image">
+                <h3>{{ movie['title'] }}</h3>
+                <button class="details-button">
+                    <a href="/film/{{ movie['_id'] }}">View Details</a>  <!-- Simplified link -->
+                </button>
+            </div>
+            {% else %}
+            <p>No movies found.</p>
+            {% endfor %}
+        </div>
+    </section>
+    <section>
+        <h2>Top 10 on IMDb This Week</h2>
+        <div class="pic-grid">
+            {# Replace these placeholders with actual movie data from the database #}
+            <figure>
+                <img src="" alt="Top Movie 1" />
+                <figcaption>NOV 22</figcaption>
+            </figure>
+            <figure>
+                <img src="" alt="Top Movie 2" />
+                <figcaption>Movie 2</figcaption>
+            </figure>
+            <figure>
+                <img src="" alt="Top Movie 3" />
+                <figcaption>Movie 3</figcaption>
+            </figure>
+            <figure>
+                <img src="" alt="Top Movie 4" />
+                <figcaption>Movie 4</figcaption>
+            </figure>
+            <figure>
+                <img src="" alt="Top Movie 5" />
+                <figcaption>Movie 5</figcaption>
+            </figure>
+            <figure>
+                <img src="" alt="Top Movie 6" />
+                <figcaption>Movie 6</figcaption>
+            </figure>
+        </div>
+    </section>
+</body>
+</html>

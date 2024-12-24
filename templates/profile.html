@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile</title>
+    <link rel="stylesheet" href="../static/css/profile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="head-style">
+      <div class="pic-grid">
+        <button onclick="location.href='/home'">
+          Home
+          <a href="home.html"></a>
+        </button>
+
+        <form action="/search" method="get">
+          <input type="search" name="query" placeholder="Type here" />
+          <button type="submit">Search</button>
+        </form>
+
+        <button class="icon-button">
+          <i class="fas fa-user"></i>
+        </button>
+      </div>
+    </header>
+
+    <section class="profile-section">
+      <div class="profile-info">
+        <img
+          class="profile-image"
+          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
+          alt="Profile photo"
+        />
+        <div class="user-details">
+          <h2>User Profile</h2>
+          <p><strong>Name:</strong> John Doe</p>
+          <p><strong>Email:</strong> johndoe@example.com</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="ratings-section">
+      <h2>Your Ratings</h2>
+      <h4>Most Recently Rated</h4>
+      <div class="rating-list">
+        <div class="rating-item">
+          <span class="movie-title">The Shawshank Redemption</span>
+          <span class="user-rating">Your Rating: 9</span>
+        </div>
+        <div class="rating-item">
+          <span class="movie-title">Inception</span>
+          <span class="user-rating">Your Rating: 8</span>
+        </div>
+        <p>You haven't rated any titles yet. <a href="/chart/top">Get started!</a></p>
+      </div>
+    </section>
+
+    <section class="watchlist-section">
+      <h2>Your Watchlist</h2>
+      <div class="watchlist-list">
+        <p>Your watchlist is empty. Find and keep track of interesting things to watch! <a href="/watchlist">Get started now</a></p>
+      </div>
+    </section>
+  </body>
+</html>

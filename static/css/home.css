@@ -1,0 +1,238 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+.classic-button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.classic-button:hover {
+  background-color: #45a049;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  background-color: #333;
+  padding: 0.5em 1em;
+}
+
+.pic-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 20px;
+  justify-content: center;
+  /* Center the images horizontally */
+}
+
+.icon-button {
+  width: 60px;
+  height: 60px;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px;
+  background-color: black;
+  background-attachment: fixed;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.icon-button:hover {
+  background-color: bisque;
+}
+
+.icon-grid {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+}
+
+header {
+  background-color: #1c1c1c;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.footer {
+  border-radius: 5px;
+  background-color: #faf8ff;
+  text-align: center;
+  border-top: 2px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+}
+
+h {
+  color: #f5c518;
+  font-size: 1.5em;
+  margin: 20px 0;
+}
+
+header,
+footer {
+  background-color: #1c1c1c;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header button {
+  background-color: #f5c518;
+  color: #121212;
+  padding: 10px;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+header form {
+  display: flex;
+  gap: 10px;
+}
+
+header input[type="search"] {
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+}
+
+header button[type="submit"] {
+  background-color: #f5c518;
+  color: #121212;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+figure {
+  text-align: center;
+  color: #ffffff;
+  background-color: #333333;
+  padding: 10px;
+  border-radius: 5px;
+  width: calc(10% - 10px);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+  /* Center the figure element */
+}
+
+figure img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+figcaption {
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+.footer button {
+  background-color: #f5c518;
+  color: #121212;
+  padding: 10px 20px;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.icon-grid {
+  display: flex;
+  gap: 10px;
+}
+
+.icon-button svg {
+  width: 24px;
+  height: 24px;
+  fill: #ffffff;
+}
+
+footer p {
+  font-size: 0.8em;
+  color: #777;
+}
+
+.menu-btn {
+  background-color: transparent;
+  color: #f5c518;
+  font-size: 1.5em;
+  border: none;
+  cursor: pointer;
+}
+
+.menu-options a:hover {
+  background-color: #555;
+}
+
+.menu {
+  position: relative;
+}
+
+.menu-icon {
+  color: white;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.site-name {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 10px;
+}
+
+.site-name button {
+  background-color: #f5c518;
+  border: none;
+  padding: 0.3em 0.8em;
+  font-size: 1em;
+  color: #333;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+form {
+  display: flex;
+  gap: 5px;
+}
+
+input[type="search"] {
+  padding: 0.4em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button[type="submit"] {
+  padding: 0.4em;
+  background-color: #555;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
