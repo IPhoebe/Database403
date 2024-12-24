@@ -1,0 +1,136 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f3f3f3;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+  background-color: #333;
+}
+
+.logo-button {
+  background-color: #f5c518;
+  color: #333;
+  font-size: 1.5em;
+  border: none;
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+
+.search-form input {
+  padding: 0.5em;
+  border-radius: 5px 0 0 5px;
+  border: 1px solid #ccc;
+}
+
+.search-form button {
+  padding: 0.5em;
+  border: none;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+  border-radius: 0 5px 5px 0;
+}
+
+.user-icon {
+  color: white;
+  font-size: 1.5em;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.film-details {
+  max-width: 800px;
+  margin: 2em auto;
+  background-color: white;
+  padding: 1em;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.film-info {
+  display: flex;
+  gap: 1em;
+}
+
+.film-img {
+  width: 200px;
+  border-radius: 5px;
+}
+
+.info-text {
+  flex: 1;
+}
+
+.info-text h1 {
+  font-size: 2em;
+  color: #333;
+}
+
+.meta-info, .cast, .duration, .summary {
+  color: #777;
+  margin: 0.5em 0;
+}
+
+.rating-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1em;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: #f5c518;
+}
+
+.rating i {
+  font-size: 1.5em;
+}
+
+.rating span {
+  font-size: 1.2em;
+}
+
+.rate-button {
+  padding: 0.5em 1em;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.watchlist-section {
+  margin-top: 1em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.watchlist-button {
+  padding: 0.5em 1em;
+  background-color: #f5c518;
+  color: #333;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.footer {
+  text-align: center;
+  padding: 1em;
+  font-size: 0.9em;
+  color: #777;
+  background-color: #333;
+  color: #fff;
+}
