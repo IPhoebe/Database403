@@ -7,8 +7,8 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
 # MongoDB connection
-client = MongoClient("mongodb://localhost:27017/")
-db = client["TestDatabase"]
+mongo = MongoClient("mongodb://localhost:27017/")
+db = mongo["TestDatabase"]
 movies_collection = db["movies"]
 users_collection = db["users"]
 reviews_collection = db["reviews"]
@@ -16,26 +16,57 @@ reviews_collection = db["reviews"]
 
 @app.route("/", methods=["GET", "POST"])
 def login():
-    if request.method == "POST":  # Handle form submission
+    if request.method == "POST":
         email = request.form.get("email")
         password = request.form.get("password")
 
         user = users_collection.find_one({"email": email})
 
         if user and check_password_hash(user['password'], password):
-            session['user_id'] = str(user['_id'])  # Store user ID in session
-            return redirect(url_for('home'))  # Redirect to the home page
-        return render_template("login.html", error="Invalid credentials")  # Render error
+            session['user_id'] = str(user['_id'])
+            return redirect(url_for('home'))
+        return render_template("login.html", error="Invalid credentials")
 
-    # Render login page on GET request
     return render_template("login.html")
 
-@app.route("/home", methods=["GET"])
+
+@app.route("/home")
 def home():
-    if 'user_id' not in session:
-        return redirect(url_for('login'))
-    movies = list(movies_collection.find())
-    return render_template("home.html", movies=movies)
+    try:
+        top_movies = list(movies_collection.find().sort("rating", -1).limit(10))
+    except Exception:
+        top_movies = []
+
+    recommendations = []
+    try:
+        user_id = session.get('user_id')
+        if user_id:
+            user = users_collection.find_one({"_id": ObjectId(user_id)})
+            if user and 'ratings' in user:
+                high_rated_movies = [
+                    rating for rating in user["ratings"] if rating["rating"] > 7
+                ]
+                high_rated_genres = []
+
+                for rating in high_rated_movies:
+                    movie = movies_collection.find_one({"_id": ObjectId(rating['movie_id'])})
+                    if movie:
+                        high_rated_genres.append(movie['genre'])
+
+                unique_genres = list(set(high_rated_genres))
+
+                rated_movie_ids = [ObjectId(rating['movie_id']) for rating in user['ratings']]
+
+                recommendations = list(
+                    movies_collection.find({
+                        "genre": {"$in": unique_genres},
+                        "_id": {"$nin": rated_movie_ids}
+                    }).limit(10)
+                )
+    except Exception:
+        recommendations = []
+
+    return render_template("home.html", movies=top_movies, recommendations=recommendations)
 
 
 @app.route("/film/<movie_id>", methods=['GET'])
@@ -57,6 +88,7 @@ def logout():
     session.pop('user_id', None)
     return redirect(url_for('login'))
 
+
 @app.route("/profile")
 def profile():
     if 'user_id' not in session:
@@ -69,6 +101,7 @@ def profile():
         return "User not found", 404
 
     return render_template("profile.html", user=user)
+
 
 @app.route("/createaccount", methods=["GET", "POST"])
 def create_account():
@@ -89,6 +122,7 @@ def create_account():
         return redirect(url_for('login'))
 
     return render_template("createaccount.html")
+
 
 @app.route("/update-watchlist", methods=["POST"])
 def update_watchlist():
@@ -113,6 +147,7 @@ def update_watchlist():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+
 @app.route("/rate-movie", methods=["POST"])
 def rate_movie():
     if 'user_id' not in session:
@@ -136,6 +171,15 @@ def rate_movie():
         return jsonify({"message": f"Rating for '{movie_title}' saved successfully"})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+@app.route("/search", methods=["GET"])
+def search():
+    query = request.args.get("query", "").strip()
+    results = []
+    if query:
+        results = list(movies_collection.find({"title": {"$regex": query, "$options": "i"}}).limit(10))
+    return jsonify(results)
 
 
 @app.route("/api/reviews", methods=["POST"])
@@ -168,6 +212,7 @@ def add_review():
 def get_reviews(movie_id):
     reviews = list(reviews_collection.find({"movie_id": ObjectId(movie_id)}))
     return jsonify([{"username": r["username"], "comment": r["comment"]} for r in reviews])
+
 
 if __name__ == "__main__":
     app.run(debug=True)
