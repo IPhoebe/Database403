@@ -1,0 +1,144 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f3f3;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em;
+    background-color: #333;
+    color: white;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+}
+
+.home-icon, .user-icon {
+    color: white;
+    font-size: 1.5em;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.home-icon:hover, .user-icon:hover {
+    color: #007bff;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px;
+}
+
+.film-details {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.film-info {
+    display: flex;
+    gap: 20px;
+}
+
+.film-img {
+    width: 200px;
+    border-radius: 5px;
+}
+
+.info-text {
+    flex: 1;
+}
+
+.rating-section, .watchlist-section {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #f5c518;
+}
+
+.rating i {
+    font-size: 1.5em;
+}
+
+.rate-button, .watchlist-button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.watchlist-button {
+    background-color: #f5c518;
+    color: #333;
+    font-weight: bold;
+}
+
+.reviews-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.review-input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: vertical;
+}
+
+.submit-review-button {
+    align-self: flex-end;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.review-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.review-item {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+}

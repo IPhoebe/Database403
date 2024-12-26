@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f3f3;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    padding: 0.5em 1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+
+.h2{
+    color: #f5c518;
+    margin-left: 20px;
+    font-size: xx-large;
+}
+
+.h3{
+    color: black;
+    text-align: center;
+}
+
+.h_genre{
+    background-color: #333333;
+    color: #f5c518;
+}
+
+.pic-grid {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    padding: 1em;
+    flex-wrap: wrap;
+}
+
+header form {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+header input[type="search"] {
+    padding: 0.4em;
+    border: none;
+    border-radius: 5px;
+}
+
+header button {
+    background-color: #f5c518;
+    color: #333;
+    border: none;
+    padding: 0.4em 0.8em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.menu-btn {
+    background-color: transparent;
+    color: #f5c518;
+    font-size: 1.5em;
+    border: none;
+    cursor: pointer;
+}
+
+.search-results {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-top: 1rem;
+    padding: 1rem 0;
+    gap: 1rem;
+}
+
+.movie-card {
+    flex: 0 0 auto;
+    width: 150px;
+    height: 100px;
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 0.5em;
+}
+
+.movie-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+

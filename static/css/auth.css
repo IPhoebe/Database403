@@ -1,0 +1,121 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f3f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+    padding: 1em;
+  }
+  
+  .logo-button {
+    background-color: #f5c518;
+    color: #333;
+    border: none;
+    font-size: 1.5em;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  
+  .logo-button a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 2em;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  h1 {
+    color: #333;
+    font-size: 1.8em;
+    margin-bottom: 1em;
+  }
+  
+  label {
+    display: block;
+    text-align: left;
+    font-weight: bold;
+    color: #333;
+    margin-top: 1em;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 0.8em;
+    margin-top: 0.5em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  .pass-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1em;
+  }
+  
+  .pass-grid a {
+    color: #0066c0;
+    text-decoration: none;
+    font-size: 0.9em;
+  }
+  
+  .pass-grid a:hover {
+    text-decoration: underline;
+  }
+  
+  .login-button {
+    width: 100%;
+    padding: 0.8em;
+    margin-top: 1em;
+    background-color: #f5c518;
+    border: none;
+    border-radius: 5px;
+    color: #333;
+    font-size: 1em;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .create-account-button {
+    width: 100%;
+    padding: 0.8em;
+    margin-top: 0.5em;
+    background-color: #e5e5e5;
+    border: none;
+    border-radius: 5px;
+    color: #333;
+    font-size: 1em;
+    cursor: pointer;
+  }
+  
+  .new-to-imdb {
+    margin-top: 1.5em;
+    color: #777;
+    font-size: 0.9em;
+  }
+  
+  .footer {
+    margin-top: 1.5em;
+    font-size: 0.9em;
+    color: #777;
+  }
+  
