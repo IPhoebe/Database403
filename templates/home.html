@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Home</title>
+    <link rel="stylesheet" href="../static/css/home.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<header>
+    <div class="pic-grid">
+        <button class="menu-btn" onclick="toggleMenu()">≡ Menu</button>
+        <div class="menu-list" id="menuList">
+            <a href="#home">Home</a>
+            <a href="/profile">Profile</a>
+        </div>
+        <a href="/home">
+            <button>Home</button>
+        </a>
+        <form id="searchForm">
+            <input type="search" id="searchInput" placeholder="Type here"/>
+            <button type="submit">Search</button>
+        </form>
+        <div id="searchResults" class="search-results"></div>
+    </div>
+</header>
+
+<section>
+    <h2 class="h2">Movies</h2>
+    <div class="pic-grid">
+        {% for movie in movies %}
+            <div class="movie-card">
+{#                <img src="{{ movie['image'] }}" alt="{{ movie['title'] }}" class="movie-image">#}
+                <h3 class="h3"><a class="h3" href="/film/{{ movie['_id'] }}">{{ movie['title'] }}</a></h3>
+            </div>
+        {% else %}
+            <p>No top movies available at the moment. Please check back later!</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section>
+    <h2 class="h2">Recommendation for You *-*</h2>
+    {% if recommendations %}
+        <div class="pic-grid">
+            {% for movie in recommendations %}
+                <div class="movie-card">
+{#                    <img src="{{ movie['image'] }}" alt="{{ movie['title'] }}" class="movie-image">#}
+                    <h3 class="h3"><a class="h3" href="/film/{{ movie['_id'] }}">{{ movie['title'] }}</a></h3>
+                    <p class="h_genre">Genre: {{ movie['genre'] }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No recommendations found. Rate more movies to get personalized recommendations!</p>
+    {% endif %}
+</section>
+
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById("menuList");
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    const searchForm = document.getElementById('searchForm');
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+
+    searchForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const query = searchInput.value.trim();
+        if (!query) return;
+
+        fetch(`/search?query=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                searchResults.innerHTML = '';
+                if (data.length === 0) {
+                    searchResults.innerHTML = '<p>No results found</p>';
+                    return;
+                }
+
+                data.forEach(movie => {
+                    const movieDiv = document.createElement('div');
+                    movieDiv.classList.add('movie-card');
+                    movieDiv.innerHTML = `
+                        <img src="${movie.image}" alt="${movie.title}" class="movie-image">
+                        <h3><a href="/film/${movie._id}">${movie.title}</a></h3>
+                    `;
+                    searchResults.appendChild(movieDiv);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching search results:', error);
+                searchResults.innerHTML = '<p>Error fetching results</p>';
+            });
+    });
+</script>
+
+</body>
+</html>

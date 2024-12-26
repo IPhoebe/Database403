@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{{ movie['title'] }}</title>
+    <link rel="stylesheet" href="../static/css/film.css"/>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+</head>
+<body>
+<header class="header">
+    <h1>{{ movie['title'] }}</h1>
+    <div class="button-container">
+        <button class="home-icon" onclick="location.href='/home'"><i class="fa fa-home"></i></button>
+        <button class="user-icon" onclick="location.href='/profile'"><i class="fa fa-user"></i></button>
+    </div>
+</header>
+<div class="grid">
+    <main class="film-details">
+        <section class="film-info">
+            <img
+                    class="film-img"
+                    src="{{ movie['image'] }}"
+                    alt="{{ movie['title'] }}"
+            />
+            <div class="info-text">
+                <p><b>Director: </b>{{ movie['director'] }}</p>
+                <p><b>Genre: </b>{{ movie['genre'] }}</p>
+                <p><b>Stars: </b>{{ movie['cast'] }}</p>
+                <p><b>Duration: </b>{{ movie['duration'] }}</p>
+                <p><b>Summary: </b>{{ movie['summary'] }}</p>
+            </div>
+        </section>
+
+        <section class="rating-section">
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <span>{{ movie['rating'] }}</span>
+                <small>{{ movie['ratings_count'] }} ratings</small>
+            </div>
+            <button class="rate-button" onclick="rateMovie()">Rate</button>
+        </section>
+
+        <section class="watchlist-section">
+            <button onclick="addToWatchlist()" class="watchlist-button">
+                <i class="fa fa-plus"></i> Add to Watchlist
+            </button>
+        </section>
+    </main>
+
+    <aside class="reviews-section">
+        <h3>Reviews</h3>
+        <form id="reviewForm">
+            <input type="hidden" id="username" value="{{ username }}"/>
+            <textarea id="comment" placeholder="Enter your comment here..." required></textarea>
+            <button class="submit-button" type="submit">Submit</button>
+        </form>
+        <div id="reviews"></div>
+    </aside>
+</div>
+
+<footer class="footer">
+    <p>&copy;2024 by Mobina and Marzieh.</p>
+</footer>
+
+<script>
+    function rateMovie() {
+        const rating = prompt("Enter your rating (1-10):");
+        if (rating !== null) {
+            fetch('/rate-movie', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    movie_id: '{{ movie["_id"] }}',
+                    movie_title: '{{ movie["title"] }}',
+                    rating: parseInt(rating, 10)
+                }),
+            })
+                .then(response => response.json())
+                .then(data => alert(data.message))
+                .catch(error => console.error('Error:', error));
+        }
+    }
+
+    function addToWatchlist() {
+        fetch('/update-watchlist', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                movie_id: '{{ movie["_id"] }}',
+                movie_title: '{{ movie["title"] }}'
+            })
+        })
+            .then(response => response.json())
+            .then(data => alert(data.message))
+            .catch(error => console.error('Error:', error));
+    }
+
+    document.getElementById('reviewForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const comment = document.getElementById('comment').value;
+
+        await fetch('/api/reviews', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                movie_id: '{{ movie["_id"] }}',
+                username: username,
+                comment: comment
+            }),
+        });
+
+        loadReviews();
+    });
+
+    async function loadReviews() {
+        const response = await fetch(`/api/reviews/{{ movie["_id"] }}`);
+        const reviews = await response.json();
+        const reviewsDiv = document.getElementById('reviews');
+        reviewsDiv.innerHTML = '';
+
+        reviews.forEach(review => {
+            const reviewElem = document.createElement('div');
+            reviewElem.className = 'review-item';
+            reviewElem.innerHTML = `<strong>${review.username}</strong>: ${review.comment}`;
+            reviewsDiv.appendChild(reviewElem);
+        });
+    }
+
+    loadReviews();
+</script>
+</body>
+</html>
