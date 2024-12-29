@@ -3,6 +3,7 @@ body {
     background-color: #f3f3f3;
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 
 header {
@@ -20,22 +21,9 @@ header {
     font-size: xx-large;
 }
 
-.h3{
-    color: black;
-    text-align: center;
-}
-
 .h_genre{
     background-color: #333333;
     color: #f5c518;
-}
-
-.pic-grid {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-    padding: 1em;
-    flex-wrap: wrap;
 }
 
 header form {
@@ -76,21 +64,70 @@ header button {
     gap: 1rem;
 }
 
-.movie-card {
-    flex: 0 0 auto;
-    width: 150px;
-    height: 100px;
-    text-align: center;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 0.5em;
+.pic-grid {
+    display: flex;
+    flex-wrap: wrap; ]
+    gap: 20px;
+    justify-content: center;
 }
 
-.movie-image {
+.movie-card {
+    width: 150px;
+    height: 220px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.film-img {
     width: 100%;
     height: auto;
-    border-radius: 5px;
 }
 
+.h3 {
+    margin: 8px 0;
+    font-size: 16px;
+    color: #333;
+}
+.movie-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+.background {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    background-attachment: fixed;
+}
+
+.content {
+    height: 200vh;
+    padding: 20px;
+    color: white;
+}
+
+.menu-list {
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: none;
+}
+
+.menu-list a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.menu-list a:hover {
+    background-color: #f0f0f0;
+}

@@ -19,6 +19,14 @@ body {
     gap: 10px;
 }
 
+.background {
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmHTR1oNjbunSUiRPpNtI1LGVdhmj9UGlzZA&shttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmHTR1oNjbunSUiRPpNtI1LGVdhmj9UGlzZA&s");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+}
+
 .home-icon, .user-icon {
     color: white;
     font-size: 1.5em;

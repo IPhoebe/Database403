@@ -7,16 +7,16 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-  }
-  
-  .header {
+}
+
+.header {
     display: flex;
     justify-content: center;
     background-color: #333;
     padding: 1em;
-  }
-  
-  .logo-button {
+}
+
+.logo-button {
     background-color: #f5c518;
     color: #333;
     border: none;
@@ -25,14 +25,14 @@ body {
     border-radius: 5px;
     cursor: pointer;
     text-transform: uppercase;
-  }
-  
-  .logo-button a {
+}
+
+.logo-button a {
     color: inherit;
     text-decoration: none;
-  }
-  
-  .login-container {
+}
+
+.login-container {
     width: 100%;
     max-width: 400px;
     padding: 2em;
@@ -40,49 +40,49 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     text-align: center;
-  }
-  
-  h1 {
+}
+
+.h1 {
     color: #333;
     font-size: 1.8em;
     margin-bottom: 1em;
-  }
-  
-  label {
+}
+
+.label {
     display: block;
     text-align: left;
     font-weight: bold;
     color: #333;
     margin-top: 1em;
-  }
-  
-  .input-field {
+}
+
+.input-field {
     width: 100%;
     padding: 0.8em;
     margin-top: 0.5em;
     border-radius: 5px;
     border: 1px solid #ccc;
     box-sizing: border-box;
-  }
-  
-  .pass-grid {
+}
+
+.pass-grid {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 1em;
-  }
-  
-  .pass-grid a {
+}
+
+.pass-grid a {
     color: #0066c0;
     text-decoration: none;
     font-size: 0.9em;
-  }
-  
-  .pass-grid a:hover {
+}
+
+.pass-grid a:hover {
     text-decoration: underline;
-  }
-  
-  .login-button {
+}
+
+.login-button {
     width: 100%;
     padding: 0.8em;
     margin-top: 1em;
@@ -93,9 +93,9 @@ body {
     font-size: 1em;
     cursor: pointer;
     font-weight: bold;
-  }
-  
-  .create-account-button {
+}
+
+.create-account-button {
     width: 100%;
     padding: 0.8em;
     margin-top: 0.5em;
@@ -105,17 +105,24 @@ body {
     color: #333;
     font-size: 1em;
     cursor: pointer;
-  }
-  
-  .new-to-imdb {
+}
+
+.new-to-imdb {
     margin-top: 1.5em;
     color: #777;
     font-size: 0.9em;
-  }
-  
-  .footer {
+}
+
+.footer {
     margin-top: 1.5em;
     font-size: 0.9em;
     color: #777;
-  }
-  
+}
+
+.background {
+    background:url('data:image/jpeg;base64,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');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+}

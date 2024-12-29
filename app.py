@@ -1,4 +1,7 @@
-from flask import Flask, render_template, request, jsonify, redirect, url_for, session
+from http.client import responses
+
+from dns.message import make_response
+from flask import Flask, render_template, request, jsonify, redirect, url_for, session, flash
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -33,7 +36,7 @@ def login():
 @app.route("/home")
 def home():
     try:
-        top_movies = list(movies_collection.find().sort("rating", -1).limit(10))
+        top_movies = list(movies_collection.find().sort("rating", -1))
     except Exception:
         top_movies = []
 
@@ -61,13 +64,12 @@ def home():
                     movies_collection.find({
                         "genre": {"$in": unique_genres},
                         "_id": {"$nin": rated_movie_ids}
-                    }).limit(10)
+                    })
                 )
     except Exception:
         recommendations = []
 
     return render_template("home.html", movies=top_movies, recommendations=recommendations)
-
 
 @app.route("/film/<movie_id>", methods=['GET'])
 def film(movie_id):
@@ -85,9 +87,9 @@ def film(movie_id):
 
 @app.route("/logout", methods=["GET"])
 def logout():
-    session.pop('user_id', None)
+    session.clear()
+    flash("You have successfully logged out", "success")
     return redirect(url_for('login'))
-
 
 @app.route("/profile")
 def profile():
@@ -99,7 +101,7 @@ def profile():
 
     if not user:
         return "User not found", 404
-
+    user_watchlist = user.get('watchlist', [])
     return render_template("profile.html", user=user)
 
 
@@ -176,11 +178,13 @@ def rate_movie():
 @app.route("/search", methods=["GET"])
 def search():
     query = request.args.get("query", "").strip()
-    results = []
-    if query:
-        results = list(movies_collection.find({"title": {"$regex": query, "$options": "i"}}).limit(10))
-    return jsonify(results)
+    if not query:
+        return jsonify([])
+    movies = list(movies_collection.find({"title": {"$regex": query, "$options": "i"}}))
+    result = [{"_id": str(movie["_id"]), "title": movie["title"], "image": movie.get("image", "default_image_url.jpg")}
+              for movie in movies]
 
+    return jsonify(result)
 
 @app.route("/api/reviews", methods=["POST"])
 def add_review():
